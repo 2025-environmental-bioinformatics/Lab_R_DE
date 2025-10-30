@@ -1,0 +1,8 @@
+name: r_de
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-base=4.5.1
+  - r-recommended
