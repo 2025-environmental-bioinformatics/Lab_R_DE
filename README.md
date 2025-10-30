@@ -7,7 +7,7 @@ First, hop onto Poseidon and clone this repo.
 Request some designated space on the HPC:\
 `srun --time=02:00:00 --mem=10gb -n 1 -p compute --pty bash`
 
-Now, let's set up a conda environment to play in using the provided .yml file. It can be complicated to install R in a conda environment, so I'm giving you a file that should let you work with R v4 in a jupyter notebook (the final line helps with that).
+Now, let's set up a conda environment to play in using the provided .yml file.
 
 ```
 mamba env create -f R_DE.yml
@@ -31,7 +31,7 @@ install.packages("gridExtra")
 BiocManager::install("DESeq2")
 ```
 
-Note: In theory, you should be able to run all of this in a Jupyter notebook in an R kernel. In practice, sometimes complex R packages can be a bit difficult to install in Jupyter environments. Today we'll work directly in R on the HPC. Later, we'll cover how to make images in R on the screen-less HPC interface.
+Note: In theory, you should be able to run all of this in a Jupyter notebook in an R kernel. In practice, sometimes complex R packages can be a bit difficult to install in Jupyter environments. We'll work directly in R on the HPC. Later, we'll cover how to make images in R on the screen-less HPC interface.
 
 ## Differential Expression
 
