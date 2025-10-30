@@ -11,7 +11,7 @@ Now, let's set up a conda environment to play in using the provided .yml file.
 
 ```
 mamba env create -f R_DE.yml
-mamba activate r_diffex
+mamba activate r_de
 ```
 
 We're going to install the packages we need directly in R. Open R interactively by typing:\
