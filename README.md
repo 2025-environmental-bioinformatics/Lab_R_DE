@@ -12,7 +12,6 @@ Now, let's set up a conda environment to play in using the provided .yml file. I
 ```
 mamba env create -f R_DE.yml
 mamba activate r_diffex
-R -e 'IRkernel::installspec()'
 ```
 
 We're going to install the packages we need directly in R. Open R interactively by typing:\
