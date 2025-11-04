@@ -1,11 +1,22 @@
 # Lab_GeneExpression
 
-## General Setup
+## Cleanup prior "bad" R environment
 
-First, hop onto Poseidon and clone this repo.
+Check the conda environments you have installed, and find the one you want to remove:\
+`conda env list`
+
+Remove the `r_de` environment:\
+`conda env remove -n r_de`
+
+Note that an environment *must be* deactivated to be removed - you cannot remove an environment while you are actively using it.
+
+## General Setup
 
 Request some designated space on the HPC:\
 `srun --time=02:00:00 --mem=10gb -n 1 -p compute --pty bash`
+
+Let's modify our prior unsuccessful .yml file to install DESeq2 via conda rather than through R:\
+``
 
 Now, let's set up a conda environment to play in using the provided .yml file.
 
