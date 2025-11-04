@@ -15,7 +15,7 @@ Note that an environment *must be* deactivated to be removed - you cannot remove
 Request some designated space on the HPC:\
 `srun --time=02:00:00 --mem=10gb -n 1 -p compute --pty bash`
 
-Let's modify our prior unsuccessful .yml file to install DESeq2 via conda rather than through R. Find the R programs DESeq2, ggplot2, and GridExtra at [Anaconda.org](www.anaconda.org), then modify your .yml file accordingly. Since we are most interested in DESeq2, let's set that to install the most recent available version and leave the other programs and packages unconstrained.\
+Let's modify our prior unsuccessful .yml file to install DESeq2 via conda rather than through R. Find the R programs DESeq2, ggplot2, and GridExtra at [Anaconda.org](anaconda.org), then modify your .yml file accordingly. Since we are most interested in DESeq2, let's set that to install the most recent available version and leave the other programs and packages unconstrained.\
 
 Some R packages are available on a more specialized sciencey corner of R called Bioconductor (similar to biopython), and these need to be installed somewhat differently. DESeq2 is one of these, hence why it gets a special prefix (`bioconductor-` rather than `r-`).
 
