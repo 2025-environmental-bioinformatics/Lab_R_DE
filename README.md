@@ -15,8 +15,23 @@ Note that an environment *must be* deactivated to be removed - you cannot remove
 Request some designated space on the HPC:\
 `srun --time=02:00:00 --mem=10gb -n 1 -p compute --pty bash`
 
-Let's modify our prior unsuccessful .yml file to install DESeq2 via conda rather than through R:\
-``
+Let's modify our prior unsuccessful .yml file to install DESeq2 via conda rather than through R. Find the R programs DESeq2, ggplot2, and GridExtra at [Anaconda.org](www.anaconda.org), then modify your .yml file accordingly. Since we are most interested in DESeq2, let's set that to install the most recent available version and leave the other programs and packages unconstrained.\
+
+Some R packages are available on a more specialized sciencey corner of R called Bioconductor (similar to biopython), and these need to be installed somewhat differently. DESeq2 is one of these, hence why it gets a special prefix (`bioconductor-` rather than `r-`).
+
+```
+name: r_de
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-base
+  - r-recommended
+  - r-ggplot2
+  - r-gridextra
+  - bioconductor-deseq2=1.46.0
+```
 
 Now, let's set up a conda environment to play in using the provided .yml file.
 
@@ -24,25 +39,6 @@ Now, let's set up a conda environment to play in using the provided .yml file.
 mamba env create -f R_DE.yml
 mamba activate r_de
 ```
-
-We're going to install the packages we need directly in R. Open R interactively by typing:\
-`R`
-
-Your prompt should change to a greater-than sign:\
-`>`
-
-First, we need to install some packages we'll want to work with: `DESeq2` (which is used for differential expression), and `ggplot2`, which is used for plotting. The standard approach to installing R packages uses the R `install.packages()` command. However, some R packages are available on a more specialized sciencey corner of R called Bioconductor (similar to biopython), and these need to be installed somewhat differently. If `install.packages()` says that a package doesn't exist, search for it online - it is likely installed via Bioconductor instead.
-
-Install `DESeq2` through Bioconductor. You'll need to first install `BiocManager` (the Bioconductor installer). For good measure, and so we can play with data display, load `ggplot2` and `gridExtra`.
-
-```
-install.packages("BiocManager")
-install.packages("ggplot2")
-install.packages("gridExtra")
-BiocManager::install("DESeq2")
-```
-
-Note: In theory, you should be able to run all of this in a Jupyter notebook in an R kernel. In practice, sometimes complex R packages can be a bit difficult to install in Jupyter environments. We'll work directly in R on the HPC. Later, we'll cover how to make images in R on the screen-less HPC interface.
 
 ## Differential Expression
 
@@ -52,7 +48,13 @@ Nearly all gene expression analysis programs work in R. Much like python, a lot 
 
 Many folks prefer to run R locally (not on the HPC) because it can be finicky to install R packages and deal with images on the HPC. If you want a fuller-featured interface, you can use R on the HPC via Jupyter (should be possible with this class environment), or even RStudio with some legwork. Arianna provides some guidance for setting up RStudio on the HPC [here](https://alexanderlabwhoi.github.io/post/2021-03-17-xquartz/). For simplicity, today we're just going to work directly in R on Poseidon.
 
-Once packages are installed, you need to load them in your environment (or script) in order to use them. R packages are loaded with this syntax: `library(PACKAGE_NAME)`. Like so many things in UNIX, package names are case-sensitive. Now, load the DESeq2 library that you previously installed:
+Open R interactively by typing:\
+`R`
+
+Your prompt should change to a greater-than sign:\
+`>`
+
+Once packages are installed, you need to load them in your environment (or script) in order to use them. R packages are loaded with this syntax: `library(PACKAGE_NAME)`. Like so many things in UNIX, package names are case-sensitive. Now, load the libraries that you installed via your .yml file:\
 
 ```
 library(DESeq2)
